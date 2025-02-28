@@ -46,7 +46,6 @@ p:not(:first-child) {
 
 <style lang="scss" scoped>
 h1 {
-  /* color: var(--clr-primary); */
   position: relative;
   &::after {
     content: "";

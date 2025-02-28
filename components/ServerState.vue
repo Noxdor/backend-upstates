@@ -3,7 +3,9 @@
 
   <p>
     Status:
-    <span class="availability" :data-state="statusName">{{ statusName }}</span>
+    <span class="availability" :data-state="statusName"
+      >{{ statusName }} <span v-if="statusCode">({{ statusCode }})</span></span
+    >
   </p>
 </template>
 
@@ -24,9 +26,15 @@ const { apiEndpoint } = defineProps<{
 }>()
 
 const status = ref<boolean | null>(null)
+const statusCode = ref<number | null>(null)
 
 onMounted(async () => {
-  status.value = (await $fetch<{ status: boolean }>(apiEndpoint)).status
+  const result = await $fetch<{ status: boolean; statusCode: number }>(
+    apiEndpoint,
+  )
+
+  status.value = result.status
+  statusCode.value = result.statusCode
 })
 
 const statusName = computed(() => {

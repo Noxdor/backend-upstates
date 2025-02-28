@@ -5,5 +5,5 @@ export default defineEventHandler(async () => {
 
   const status = statusCode < 300
 
-  return { status }
+  return { status, statusCode }
 })
